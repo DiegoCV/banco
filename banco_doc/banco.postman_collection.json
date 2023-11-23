@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "5330666f-6bda-4287-97aa-cdd1edc37539",
+		"name": "banco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8108056"
+	},
+	"item": [
+		{
+			"name": "personas_app",
+			"item": [
+				{
+					"name": "crear_cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"persona\": {\r\n        \"nombre\": \"Diego Alirio Carrascal\",\r\n        \"genero\": \"masculino\",\r\n        \"edad\": 25,\r\n        \"identificacion\": \"123456789\",\r\n        \"direccion\": \"calle falsa 123\",\r\n        \"telefono\": \"3114445555\"\r\n    },\r\n    \"contrasenna\": \"123\",\r\n    \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar_cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contrasenna\": \"12345\",\r\n    \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/clientes/4f1d5c24-e7d4-4301-a957-c6a47035d682",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"4f1d5c24-e7d4-4301-a957-c6a47035d682"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar_cliente Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/clientes/4f1d5c24-e7d4-4301-a957-c6a47035d682",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"4f1d5c24-e7d4-4301-a957-c6a47035d682"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cuentas_app",
+			"item": [
+				{
+					"name": "crear_cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numero\": \"987654321\",\r\n    \"tipo\": \"ahorros\",\r\n    \"saldo\": 1000.0,\r\n    \"estado\": true,\r\n    \"clienteId\":\"d5044cd5-cb30-4a98-bcbc-639a41e868b5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/cuentas",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar_cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"saldo\": 4000.0,\r\n    \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/cuentas/bbec4b7a-c9b8-4aa5-8052-c0d3586283c6",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cuentas",
+								"bbec4b7a-c9b8-4aa5-8052-c0d3586283c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar_cuenta Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cuentas/bbec4b7a-c9b8-4aa5-8052-c0d3586283c6",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cuentas",
+								"bbec4b7a-c9b8-4aa5-8052-c0d3586283c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear_movimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"deposito\",\r\n    \"valor\": 5000.0,\r\n    \"cuenta\": {\r\n        \"id\": \"107091f0-4dbe-4eb8-ac80-c66691fb3eb0\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/movimientos",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reportes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clienteID\":\"d5044cd5-cb30-4a98-bcbc-639a41e868b5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/reportes",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"reportes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

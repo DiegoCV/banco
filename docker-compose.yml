@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  personas_app:
+    build: personas_app
+    depends_on:
+      banco_db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    networks:
+      - spring-postgres
+
+  cuentas_app:
+    build: cuentas_app
+    depends_on:
+      banco_db:
+        condition: service_healthy
+    ports:
+      - 8081:8081
+    networks:
+      - spring-postgres
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring-postgres
+
+  banco_db:
+    image: postgres:12.2
+    container_name: banco_db
+    restart: always
+    volumes:
+      - ./banco_db/BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql
+    networks:
+      - spring-postgres
+    environment:
+      - POSTGRES_DB=${DB}
+      - POSTGRES_USER=${POSTGRESUSER}
+      - POSTGRES_PASSWORD=${POSTGRESPASSWORD}
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+volumes:
+  db-data:
+networks:
+  spring-postgres:
