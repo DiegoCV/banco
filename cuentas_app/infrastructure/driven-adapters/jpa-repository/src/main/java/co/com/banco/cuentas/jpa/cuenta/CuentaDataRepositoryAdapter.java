@@ -3,6 +3,7 @@ package co.com.banco.cuentas.jpa.cuenta;
 import co.com.banco.cuentas.jpa.helper.AdapterOperations;
 import co.com.banco.cuentas.model.cuenta.Cuenta;
 import co.com.banco.cuentas.model.cuenta.gateways.CuentaRepository;
+import co.com.banco.cuentas.model.reporte.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -37,5 +38,10 @@ public class CuentaDataRepositoryAdapter extends AdapterOperations<Cuenta, Cuent
         return cuentasData.stream().map(c -> cuentaMapper.toEntity(c))
                 .collect(Collectors.toCollection(ArrayList::new));
 
+    }
+
+    @Override
+    public List<Reporte> generateReporte(UUID clienteID) {
+        return repository.generateReporte(clienteID);
     }
 }

@@ -10,6 +10,7 @@ import co.com.banco.cuentas.usecase.movimiento.MovimientoUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static co.com.banco.cuentas.model.movimiento.common.MovimientoConstans.RETIRO;
 
@@ -22,24 +23,12 @@ public class ReporteUseCaseImpl implements ReporteUseCase {
 
     @Override
     public List<Reporte> generarReportesPorRangoFechas(UUID clienteId, Date fechaInicio, Date FechaFin) {
-        // Este reporte sale facilmente con un query,
-        // está escrito en el repo pero no implementado
-        // como me quedé sin tiempo me da más facil hacerlo de esta manera
         ClienteReply clienteReply = clienteRabbitRepository.buscarClienteById(clienteId);
-        List<Cuenta> cuentas = cuentaUseCase.findByClienteId(clienteId);
-        List<Reporte> reportes = new ArrayList<>();
-        for (Cuenta c: cuentas) {
-            List<Movimiento> movimientos = movimientoUseCase.findByCuenta(c);
-            for (Movimiento m: movimientos) {
-                reportes.add(Reporte.builder()
-                        .fecha(m.getFecha())
-                        .cliente(clienteReply.getNombre())
-                        .numeroCuenta(c.getNumero()).tipo(c.getTipo()).saldoInicial(m.getSaldo()).estado(c.getEstado())
-                        .movimiento(validarValorMovimiento(m)).saldoDisponible(c.getSaldo())
-                        .build());
-            }
-        }
-        return reportes;
+        List<Reporte> reportes = cuentaUseCase.generateReporte(clienteId);
+        return reportes.stream().map(reporte -> {
+            reporte.setCliente(clienteReply.getNombre());
+            return reporte;
+        }).collect(Collectors.toList());
     }
 
     private Double validarValorMovimiento(Movimiento m){

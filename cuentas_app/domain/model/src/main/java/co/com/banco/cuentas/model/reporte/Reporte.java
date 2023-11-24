@@ -15,4 +15,17 @@ public class Reporte {
     private boolean estado;
     private Double movimiento;
     private Double saldoDisponible;
+
+    public Reporte(Date fecha,
+                   String cliente, long numeroCuenta, String tipo, double saldoInicial, boolean estado,
+                   double movimiento, double saldoDisponible) {
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.numeroCuenta = numeroCuenta;
+        this.tipo = tipo;
+        this.saldoInicial = saldoInicial;
+        this.estado = estado;
+        this.movimiento = movimiento;
+        this.saldoDisponible = saldoDisponible;
+    }
 }
