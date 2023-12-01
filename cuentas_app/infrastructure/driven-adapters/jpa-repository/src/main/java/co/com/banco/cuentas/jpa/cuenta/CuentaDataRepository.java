@@ -1,8 +1,10 @@
 package co.com.banco.cuentas.jpa.cuenta;
 
 import co.com.banco.cuentas.model.reporte.Reporte;
+import co.com.banco.cuentas.model.reporte.ReporteConsulta;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public interface CuentaDataRepository extends CrudRepository<CuentaData, UUID>, 
             "FROM CuentaData c " +
             "LEFT OUTER JOIN MovimientoData m " +
             "ON c.id = m.cuenta.id " +
-            "WHERE c.clienteID = ?1")
-    List<Reporte> generateReporte(UUID clienteID);
+            "WHERE c.clienteID = :#{#consulta.clienteID} " +
+            "AND m.fecha BETWEEN :#{#consulta.fechaInicial} AND :#{#consulta.fechaFinal}")
+    List<Reporte> generateReporte(@Param("consulta") ReporteConsulta reporteConsulta);
 }

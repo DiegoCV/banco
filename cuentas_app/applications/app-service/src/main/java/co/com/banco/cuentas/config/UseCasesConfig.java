@@ -50,8 +50,7 @@ public class UseCasesConfig {
 
         @Bean
         public ReporteUseCase reporteUseCase(ClienteRabbitRepository clienteRabbitRepository,
-                                             CuentaUseCase cuentaUseCase,
-                                             MovimientoUseCase movimientoUseCase){
-            return new ReporteUseCaseImpl(clienteRabbitRepository, cuentaUseCase, movimientoUseCase);
+                                             CuentaUseCase cuentaUseCase){
+            return new ReporteUseCaseImpl(clienteRabbitRepository, cuentaUseCase);
         }
 }

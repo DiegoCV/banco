@@ -4,6 +4,7 @@ import co.com.banco.cuentas.model.common.CuentaException;
 import co.com.banco.cuentas.model.cuenta.Cuenta;
 import co.com.banco.cuentas.model.cuenta.gateways.CuentaRepository;
 import co.com.banco.cuentas.model.reporte.Reporte;
+import co.com.banco.cuentas.model.reporte.ReporteConsulta;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class CuentaUseCaseImpl implements CuentaUseCase {
     }
 
     @Override
-    public List<Reporte> generateReporte(UUID clienteID) {
-        return cuentaRepository.generateReporte(clienteID);
+    public List<Reporte> generateReporte(ReporteConsulta reporteConsulta) {
+        return cuentaRepository.generateReporte(reporteConsulta);
     }
 }

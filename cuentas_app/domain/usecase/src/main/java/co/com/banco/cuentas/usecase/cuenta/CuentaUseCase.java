@@ -2,6 +2,7 @@ package co.com.banco.cuentas.usecase.cuenta;
 
 import co.com.banco.cuentas.model.cuenta.Cuenta;
 import co.com.banco.cuentas.model.reporte.Reporte;
+import co.com.banco.cuentas.model.reporte.ReporteConsulta;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,5 +18,5 @@ public interface CuentaUseCase {
 
     List<Cuenta> findByClienteId(UUID clienteId);
 
-    List<Reporte> generateReporte(UUID clienteID);
+    List<Reporte> generateReporte(ReporteConsulta reporteConsulta);
 }

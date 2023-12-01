@@ -1,6 +1,7 @@
 package co.com.banco.cuentas.api.common;
 
 import co.com.banco.cuentas.model.common.CuentaException;
+import co.com.banco.cuentas.model.common.FormatoFechasExepcion;
 import co.com.banco.cuentas.model.common.MovimientoConSaldoNoDisponibleException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ public class ErrorHandler {
     @ExceptionHandler(MovimientoConSaldoNoDisponibleException.class)
     public ResponseEntity<ErrorInfo> saldoNoDisponibleException(HttpServletRequest request,
                                                                 MovimientoConSaldoNoDisponibleException e) {
+        ErrorInfo errorInfo = new ErrorInfo(HttpStatus.NOT_FOUND.value(), e.getMessage(), request.getRequestURI());
+        return new ResponseEntity<>(errorInfo, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FormatoFechasExepcion.class)
+    public ResponseEntity<ErrorInfo> formatoFechasExepcion(HttpServletRequest request, FormatoFechasExepcion e) {
         ErrorInfo errorInfo = new ErrorInfo(HttpStatus.NOT_FOUND.value(), e.getMessage(), request.getRequestURI());
         return new ResponseEntity<>(errorInfo, HttpStatus.NOT_FOUND);
     }
